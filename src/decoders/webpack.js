@@ -14,6 +14,16 @@ const replace = require('../extern/replace-method');
 //   }
 // ])
 function webpackDecoder(moduleArrayAST, knownPaths) {
+  // Check for a module map (this is rare).
+  if (moduleArrayAST.type === 'ObjectExpression') {
+    return moduleArrayAST.properties.map(({key, value}) => {
+      return {
+        id: Number(key.value),
+        code: value,
+      };
+    }).filter(i => i.id && i.code);
+  }
+
   // Ensure that the bit of AST being passed is an array
   if (moduleArrayAST.type !== 'ArrayExpression') {
     throw new Error(`The root level IIFE didn't have an array for it's first parameter, aborting...`);

@@ -1,5 +1,5 @@
 var recast   = require('recast')
-var traverse = recast.types.traverse
+var visit = recast.types.visit
 var build    = recast.types.builders
 var parse    = recast.parse
 var print    = recast.print
@@ -27,7 +27,7 @@ function replacer(ast) {
 
     var size = methodPath.length
 
-    traverse(ast, size === 1
+    visit(ast, size === 1
       ? single
       : nested
     )

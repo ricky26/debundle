@@ -20,21 +20,21 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "acorn": "^4.0.11",
+    "acorn": "^8.0.4",
     "arboreal": "0.0.2",
     "archy": "^1.0.0",
     "escodegen": "^1.8.1",
-    "inquirer": "^3.0.1",
+    "inquirer": "^7.3.3",
     "memoize": "^0.1.1",
     "minimist": "^1.2.0",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1.0.4",
     "promise-map-series": "^0.2.3",
-    "recast": "~0.5.7"
+    "recast": "^0.20.4"
   },
   "devDependencies": {
-    "mocha": "^3.2.0",
+    "mocha": "^8.2.1",
     "mock-fs": "^4.1.0",
-    "nyc": "^10.1.2"
+    "nyc": "^15.1.0"
   },
   "bin": {
     "debundle": "src/index.js"
