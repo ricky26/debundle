@@ -24,6 +24,16 @@ function webpackDecoder(moduleArrayAST, knownPaths) {
     }).filter(i => i.id && i.code);
   }
 
+  // Check for Array(x).concat([]) syntax (super rare!).
+  const isArrayConcat = (moduleArrayAST.type === 'CallExpression')
+    && moduleArrayAST.callee.object
+    && moduleArrayAST.callee.object.callee
+    && (moduleArrayAST.callee.object.callee.name === 'Array')
+    && (moduleArrayAST.callee.property.name === 'concat');
+  if (isArrayConcat) {
+    moduleArrayAST = moduleArrayAST.arguments[0];
+  }
+
   // Ensure that the bit of AST being passed is an array
   if (moduleArrayAST.type !== 'ArrayExpression') {
     throw new Error(`The root level IIFE didn't have an array for it's first parameter, aborting...`);
